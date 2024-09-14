@@ -1,5 +1,7 @@
 "use client"
 
+import PocketBase from 'pocketbase'
+
 import { useState, useEffect } from 'react';
 
 export default function RecipeList() {
@@ -7,13 +9,19 @@ export default function RecipeList() {
     const [weeklyPlan, setWeeklyPlan] = useState(new Map())
     const [isLoading, setLoading] = useState(true)
 
+    const pb = new PocketBase('https://recipe.pockethost.io/')
+    pb.autoCancellation(false)
+
     useEffect(() => {
-        fetch('http://localhost:4000/recipes')
-        .then((res) => res.json())
-        .then((data) => {
-            setRecipes(data)
+        async function fetchData() {
+            const reciperecords = await pb.collection('recipes').getFullList({
+                sort: '-created', expand: "ingredients"
+            })
+            setRecipes(reciperecords)
             setLoading(false)
-        })
+        }
+
+        fetchData()
     })
 
     const generateRecipes = () => {
@@ -54,7 +62,7 @@ export default function RecipeList() {
                     <div key={day} className="card my-5">
                         <h2>{day}</h2>
                         <h3>{recipe.title}</h3>
-                        {recipe.ingredients.map(ingredients => (
+                        {recipe.expand.ingredients.map(ingredients => (
                             <div key = {ingredients.id}>
                                 <p>{ingredients.ingredient}</p>
                             </div>

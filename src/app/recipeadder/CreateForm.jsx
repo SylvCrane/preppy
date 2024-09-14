@@ -1,4 +1,5 @@
 "use client"
+import PocketBase from 'pocketbase'
 
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -35,20 +36,41 @@ export default function CreateForm() {
       const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true)
-        const recipe = {
-            title, ingredients, instructions
+        let ingredientID = []
+        const pb = new PocketBase('https://recipe.pockethost.io/')
+        try {
+            for(let i = 0; i < ingredients.length; i++)
+            {
+                const post = await pb.collection('ingredients').create({
+                    'ingredient': ingredients[i].ingredient
+                })
+
+                if (post && post.id)
+                {
+                    ingredientID.push(post.id)
+                }
+            }
+
+            const post = await pb.collection('recipes').create({
+                'title': title,
+                'ingredients': ingredientID,
+                'instructions': instructions
+            })
+
+            if (post && post.id) 
+            {
+                console.log('Recipe added', post)
+                router.refresh()
+                router.push('/plangenerator')
+            }
+            else
+            {
+                console.log('The submission was not successful due to missing an ID')
+            }
         }
-
-        const res = await fetch('http://localhost:4000/recipes', {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(recipe)
-        })
-
-        if (res.status === 201)
+        catch (error)
         {
-            router.refresh()
-            router.push('/plangenerator')
+            console.error('Error creating post', error)
         }
       }
 

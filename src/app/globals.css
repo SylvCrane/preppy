@@ -7,7 +7,7 @@ body {
     background: rgba(109, 173, 146, 1);
 }
 h1, h2 {
-    @apply font-bold text-primary text-lg;
+    @apply font-bold text-black text-lg;
   }
   main {
     @apply max-w-5xl my-12 mx-auto px-8;
@@ -21,16 +21,16 @@ h1, h2 {
   
   /* nav styles */
   nav {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0);
     @apply
-      pb-4
+      pb-2
       border-b-2 border-gray-200
       flex items-center gap-5 
       mx-auto 
       max-w-5xl;
   }
   nav a, nav span {
-    @apply text-gray-500;
+    @apply text-white;
   }
   nav a:hover {
     @apply text-black;
@@ -54,14 +54,14 @@ h1, h2 {
     @apply bg-primary text-white;
   }
   .btn-secondary {
-    @apply bg-gray-200 text-gray-900;
+    @apply bg-red-500 text-white float-right;
   }
   
   /* form styles */
   form {
     @apply 
       py-4 px-7 
-      bg-primary 
+      bg-gray-200
       bg-opacity-5 
       rounded-md 
       block 
@@ -106,15 +106,21 @@ h1, h2 {
       py-3 px-4 my-4 
       relative 
       overflow-hidden;
+      width: 1025px;
+
   }
   .card h3 {
     @apply 
       font-bold text-gray-700 text-sm 
       mb-0;
   }
-  .card p {
-    @apply my-4 text-sm leading-6;
+
+  .card h4 {
+    @apply 
+      font-bold text-gray-700 text-sm 
+      mb-0;
   }
+
   
   /* pill styles */
   .pill {

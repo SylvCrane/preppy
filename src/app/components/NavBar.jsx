@@ -8,5 +8,7 @@ export default function NavBar() {
           <Link href='/recipeadder'>Add a recipe</Link>
           <Link href='/allrecipes'>All Recipes</Link>
         </nav>
+     
+        
     )
 }

@@ -41,16 +41,24 @@ export default function RecipeList() {
         return (
             <>
             {Array.from(recipes.entries()).map(([id, recipe]) => (
-                <div key={id} className="card my-5">
-                    <button className = "btn-primary" onClick={() => deleteRecipe(recipe)}>Delete Recipe</button>
-                    <h3>{recipe.title}</h3>
+                <div key={id} className="card mx-auto">
+                    
+                    
+                    <h1>{recipe.title}</h1>
+                    <br/>
                     {recipe.expand.ingredients.map(ingredients => (
                         <div key = {ingredients.id}>
                             <p>{ingredients.ingredient}</p>
                         </div>
                     ))}
-                    <h3>{recipe.instructions}</h3>
-                    <Link href={`allrecipes/${recipe.id}`}>Update Recipe</Link>
+                    <br/>
+                    <p>{recipe.instructions}</p>
+                    <br/>
+                    <button className = "btn-secondary" onClick={() => deleteRecipe(recipe)}>Delete Recipe</button>
+                    
+                    <a href={`allrecipes/${recipe.id}`}>
+                    <button className="btn-primary">Update Recipe</button>
+                    </a>
                 </div>
             ))}   
             </>

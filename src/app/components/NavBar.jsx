@@ -6,6 +6,7 @@ export default function NavBar() {
           <Link href="/">Home</Link>
           <Link href='/plangenerator'>Generate a Meal Plan</Link>
           <Link href='/recipeadder'>Add a recipe</Link>
+          <Link href='/allrecipes'>All Recipes</Link>
         </nav>
     )
 }

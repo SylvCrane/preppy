@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## General
+Preppy is a work-in-progress recipe generator and adder, designed to encourage people to home cook more. By adding simple recipes, you can generate a week's schedule of meals to make,
+allowing you to answer the age old question of 'What do we eat tonight?'.
+
 ## Getting Started
 
 First, run the development server:
